@@ -1,5 +1,5 @@
-import { COORD } from "../types"
-import { findPointsOnSide } from "./oneDFunctions";
+import { COORD } from "../../types"
+import { findPointsOnSide } from "../oneDFunctions";
 
 describe('Функция findPointsOnSide находит координаты точек, который образуются в результате проекции граней прямоугольника (перпендикулярных оси) на заданную ось координат', () => {
     it.each([

@@ -1,6 +1,6 @@
-import { checkSegmentIncludesPoint, findPointsOnSide } from "../oneDRepresentation/oneDFunctions";
+import { checkSegmentNotIncludesPoint, findPointsOnSide } from "../oneDRepresentation/oneDFunctions";
 import { ConnectionPoint, COORD, getCoord, Rect } from "../types";
-import settings from '../graphSettings.json' assert {type: 'json'}
+import settings from '../graphSettings.json';
 
 interface IRectangle {
     rect: Rect;
@@ -38,7 +38,7 @@ export default class Rectangle implements IRectangle {
     }
 
     private validateConnectionPoint(side: COORD) {
-        if (!checkSegmentIncludesPoint(1 - side ? this.sideY : this.sideX, [this.cPoint.point[getCoord(1 - side)]])) {
+        if (checkSegmentNotIncludesPoint(1 - side ? this.sideY : this.sideX, [this.cPoint.point[getCoord(1 - side)]])) {
             throw new Error('Точка должна лежать на грани прямоугольника');
         }
     }
@@ -79,8 +79,8 @@ export default class Rectangle implements IRectangle {
     public get cornerPointsWithBorder(): [number, number][] {
         return [[this.sideX[0] - settings.rectGap, this.sideY[0] - settings.rectGap],
         [this.sideX[0] - settings.rectGap, this.sideY[1] + settings.rectGap],
-        [this.sideX[1] + settings.rectGap, this.sideY[0] - settings.rectGap],
-        [this.sideX[1] + settings.rectGap, this.sideY[1] + settings.rectGap]]
+        [this.sideX[1] + settings.rectGap, this.sideY[1] + settings.rectGap],
+        [this.sideX[1] + settings.rectGap, this.sideY[0] - settings.rectGap]]
     }
 
     public get sideX(): [number, number] {

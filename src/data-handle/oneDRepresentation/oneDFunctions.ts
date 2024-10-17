@@ -8,15 +8,25 @@ function findPointsOnSide(rect: Rect, coord: COORD): [number, number] {
 // грань в 2d
 //отрезок перевекает одну из точек 
 
-function checkSegmentIncludesPoint(oneDSegment: number[], points: number[]) {
+function checkSegmentNotIncludesPoint(oneDSegment: number[], points: number[]) {
     oneDSegment = oneDSegment.sort((num: number) => num);
     for (let point of points) {
         if (point > oneDSegment[0] && point < oneDSegment[1]) {
-            return true;
+            return false;
         }
+    }
+
+    return true;
+}
+
+function checkSegmentNotIntersectionSegment(oneDSegment1: number[], oneDSegment2: number[]) {
+    oneDSegment2 = oneDSegment2.sort((num: number) => num);
+
+    if(oneDSegment1.every(num => num <= oneDSegment2[0]) || oneDSegment1.every(num => num >= oneDSegment2[1])) {
+        return true;
     }
 
     return false;
 }
 
-export { findPointsOnSide, checkSegmentIncludesPoint }
+export { findPointsOnSide, checkSegmentNotIncludesPoint, checkSegmentNotIntersectionSegment }
