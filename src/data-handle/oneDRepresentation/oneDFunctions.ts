@@ -1,6 +1,6 @@
 import { COORD, getCoord, Rect } from "../types";
 
-function findPointsOnSide(rect: Rect, coord: COORD) {
+function findPointsOnSide(rect: Rect, coord: COORD): [number, number] {
     return [rect.position[getCoord(coord)] - 0.5 * rect.size[coord ? 'height' : 'width']
         , rect.position[getCoord(coord)] + 0.5 * rect.size[coord ? 'height' : 'width']];
 }

@@ -1,12 +1,19 @@
 import { checkSegmentIncludesPoint, findPointsOnSide } from "../oneDRepresentation/oneDFunctions";
 import { ConnectionPoint, COORD, getCoord, Rect } from "../types";
+import settings from '../graphSettings.json' assert {type: 'json'}
 
-
-export default class Rectangle {
+interface IRectangle {
     rect: Rect;
     cPoint: ConnectionPoint;
-    private _sideX: number[];
-    private _sideY: number[];
+    sideX: [number, number];
+    sideY: [number, number];
+}
+
+export default class Rectangle implements IRectangle {
+    rect: Rect;
+    cPoint: ConnectionPoint;
+    private _sideX: [number, number];
+    private _sideY: [number, number];
 
     constructor(rect: Rect, cPoint: ConnectionPoint) {
         this.rect = rect;
@@ -37,7 +44,7 @@ export default class Rectangle {
     }
 
 
-    private sidePoints(side: COORD) {
+    private sidePoints(side: COORD): [number, number] {
         const points = findPointsOnSide(this.rect, side);
         switch (side) {
             case COORD.x: this._sideX = points;
@@ -66,15 +73,22 @@ export default class Rectangle {
         };
 
         throw new Error('Неверный угол');
-           
+
+    } 
+
+    public get cornerPointsWithBorder(): [number, number][] {
+        return [[this.sideX[0] - settings.rectGap, this.sideY[0] - settings.rectGap],
+        [this.sideX[0] - settings.rectGap, this.sideY[1] + settings.rectGap],
+        [this.sideX[1] + settings.rectGap, this.sideY[0] - settings.rectGap],
+        [this.sideX[1] + settings.rectGap, this.sideY[1] + settings.rectGap]]
     }
 
-    private get sideX() {
-    return this._sideX ?? this.sidePoints(COORD.x);
-}
+    public get sideX(): [number, number] {
+        return this._sideX ?? this.sidePoints(COORD.x);
+    }
 
-    private get sideY() {
-    return this._sideY ?? this.sidePoints(COORD.y);
-}
+    public get sideY() {
+        return this._sideY ?? this.sidePoints(COORD.y);
+    }
 
 }
