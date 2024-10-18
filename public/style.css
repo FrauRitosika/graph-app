@@ -44,8 +44,8 @@ input {
   font-size: 0.9em;
 }
 .rectangle-preview {
-  width: 300px;
-  height: 300px;
+  width: 500px;
+  height: 500px;
   background-color: rgba(168, 210, 255, 0.5);
   position: relative;
 }
