@@ -1,3 +1,4 @@
+import { checkRectNotIntersectionRect } from "../twoDRepresentation/twoDFunctions";
 import Rectangle from "./Rectangle";
 
 export default class Graph {
@@ -8,9 +9,11 @@ export default class Graph {
         this.rectStart = rect1;
         this.rectEnd = rect2;
 
+        this.validateIntersectionRect();
+
     }
 
     private validateIntersectionRect() {
-
+        if(!checkRectNotIntersectionRect(this.rectStart, this.rectEnd)) throw new Error('Прямоугольники слишком близко');
     }
 }

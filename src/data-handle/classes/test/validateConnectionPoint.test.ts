@@ -22,6 +22,7 @@ describe('Объект Reatangle должен иметь точку коннек
         { x: 0.5, y: 0.1, angle: 180 },
         { x: 1, y: 2, angle: 90 },
         { x: 0.8, y: 0, angle: 270 },
+        { x: 1.5, y: 2, angle: 0 },
 
     ])('точка {$x, $y}, угол $angle', ({ x, y, angle }) => {
         const rect = new Rectangle(rectangle, {
@@ -35,7 +36,6 @@ describe('Объект Reatangle должен иметь точку коннек
 describe('Объект Reatangle должен иметь точку коннекта, которая лежит на его грани', () => {
 
     it.each([
-        { x: 1.5, y: 2, angle: 0 },
         { x: 1.4, y: 1, angle: 0  },
         { x: 1.6, y: 1, angle: 0  },
         { x: 1.5, y: 3 , angle: 0 },

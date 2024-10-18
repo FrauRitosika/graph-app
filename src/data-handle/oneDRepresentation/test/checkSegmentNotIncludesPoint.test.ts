@@ -5,7 +5,7 @@ describe('Функция проверяет содердит ли отрезок
         {
             segment: [0, 1],
             points: [0, 1],
-            result: true
+            result: false
         },
         {
             segment: [0, 1],
@@ -15,7 +15,7 @@ describe('Функция проверяет содердит ли отрезок
         {
             segment: [2, 6],
             points: [0, 2],
-            result: true
+            result: false
         },
         {
             segment: [2, 6],

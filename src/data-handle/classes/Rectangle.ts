@@ -1,5 +1,5 @@
 import { checkSegmentNotIncludesPoint, findPointsOnSide } from "../oneDRepresentation/oneDFunctions";
-import { ConnectionPoint, COORD, getCoord, Rect } from "../types";
+import { ConnectionPoint, COORD, getCoord, Point, Rect } from "../types";
 import settings from '../graphSettings.json';
 
 interface IRectangle {
@@ -74,13 +74,13 @@ export default class Rectangle implements IRectangle {
 
         throw new Error('Неверный угол');
 
-    } 
+    }
 
-    public get cornerPointsWithBorder(): [number, number][] {
-        return [[this.sideX[0] - settings.rectGap, this.sideY[0] - settings.rectGap],
-        [this.sideX[0] - settings.rectGap, this.sideY[1] + settings.rectGap],
-        [this.sideX[1] + settings.rectGap, this.sideY[1] + settings.rectGap],
-        [this.sideX[1] + settings.rectGap, this.sideY[0] - settings.rectGap]]
+    public get cornerPointsWithBorder(): Point[] {
+        return [{ x: this.sideX[0] - settings.rectGap, y: this.sideY[0] - settings.rectGap },
+        { x: this.sideX[0] - settings.rectGap, y: this.sideY[1] + settings.rectGap },
+        { x: this.sideX[1] + settings.rectGap, y: this.sideY[1] + settings.rectGap },
+        { x: this.sideX[1] + settings.rectGap, y: this.sideY[0] - settings.rectGap }]
     }
 
     public get sideX(): [number, number] {

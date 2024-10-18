@@ -6,26 +6,31 @@ const cPoint = {
     angle: 0
 }
 
-const bordarGap = [[-settings.rectGap,-settings.rectGap], [-settings.rectGap,settings.rectGap],[settings.rectGap,settings.rectGap], [settings.rectGap,-settings.rectGap]]
+const bordarGap = [{ x: -settings.rectGap, y: -settings.rectGap }, { x: -settings.rectGap, y: settings.rectGap }, { x: settings.rectGap, y: settings.rectGap }, { x: settings.rectGap, y: -settings.rectGap }]
 
 describe('Свойство cornerPointsWithBorder объектa Reatangle должено содержать набор точек, являющихся углами области прямоугольника и минимального расстояния между границами', () => {
 
     it.each([
         {
-            rect: { position: {x: 3, y: 4}, size: { width: 2, height: 2 } }
-            , cornerPoints: [[2,3], [2,5], [4,5], [4,3]]
+            rect: { position: { x: 3, y: 4 }, size: { width: 2, height: 2 } }
+            , cornerPoints: [{ x: 2, y: 3 }, { x: 2, y: 5 }, { x: 4, y: 5 }, { x: 4, y: 3 }]
         },
         {
-            rect: { position: {x: 3, y: 4}, size: { width: 2, height: 4 } }
-            , cornerPoints: [[2,2], [2,6], [4,6], [4,2]]
+            rect: { position: { x: 3, y: 4 }, size: { width: 2, height: 4 } }
+            , cornerPoints: [{ x: 2, y: 2 }, { x: 2, y: 6 }, { x: 4, y: 6 }, { x: 4, y: 2 }]
         },
         {
-            rect: { position: {x: 3.5, y: 4}, size: { width: 1, height: 4 } }
-            , cornerPoints: [[3,2], [3,6], [4,6], [4,2]]
+            rect: { position: { x: 3.5, y: 4 }, size: { width: 1, height: 4 } }
+            , cornerPoints: [{ x: 3, y: 2 }, { x: 3, y: 6 }, { x: 4, y: 6 }, { x: 4, y: 2 }]
         },
 
-    ])('точка {$rect.position.x, $rect.position.y}; точки области: cornerPoints', ({ rect, cornerPoints }) => {
+    ])('прямоугольник с центром {$rect.position.x, $rect.position.y};', ({ rect, cornerPoints }) => {
         const rectangle = new Rectangle(rect, cPoint);
-        expect(rectangle.cornerPointsWithBorder).toEqual(cornerPoints.map((point, index) => point.map((num,i) => num + bordarGap[index][i])));
+        expect(rectangle.cornerPointsWithBorder).toEqual(cornerPoints.map((point, index) => {
+            return {
+                x: point.x + bordarGap[index].x,
+                y: point.y + bordarGap[index].y
+            }
+        }));
     })
 });
