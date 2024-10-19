@@ -1,6 +1,6 @@
 import Rectangle from "../classes/Rectangle";
 import { checkMinPath } from "../twoDRepresentation/findPathBetweenPoints";
-// import { checkSegmentNotIntersectionRect } from "../twoDRepresentation/twoDFunctions";
+import { checkSegmentNotIntersectionRect } from "../twoDRepresentation/twoDFunctions";
 import { COORD, getCoord, Point } from "../types";
 
 
@@ -11,8 +11,6 @@ export default function createPath(rectStart: Rectangle, rectEnd: Rectangle) {
 
     for (let i = 0; i < 10; i++) {
 
-        console.log(path);
-
         const isAvailibleMinPath = checkMinPath(path[path.length - 1], preEndPoint, [rectStart, rectEnd]);
 
         if (isAvailibleMinPath.result && isAvailibleMinPath.point) {
@@ -21,17 +19,12 @@ export default function createPath(rectStart: Rectangle, rectEnd: Rectangle) {
                 break;
             }
         
+        path.push(findPointOnDirection(path, preEndPoint, [rectStart, rectEnd]));
 
-         const newP = findPointOnDirection(path, preEndPoint, [rectStart, rectEnd]);
-        
-        path.push(newP);
-
-        
     }
 
-    
-
     if (isFullPath) {
+        console.log([...path, preEndPoint, rectEnd.cPoint.point]);
         return [...path, preEndPoint, rectEnd.cPoint.point];
     } else {
         throw new Error('Не удалось найти путь между точками')
@@ -58,7 +51,7 @@ function findPointOnDirection(path: Point[], target: Point, rects: Rectangle[]):
 
         const newCoord = getUpPointByCoord(lastPoint, direct, rects);
         if (newCoord.result && newCoord.point 
-            // && checkSegmentNotIntersectionRect([lastPoint, newCoord.point], rects)
+            && checkSegmentNotIntersectionRect([lastPoint, newCoord.point], rects)
         ) {
             return newCoord.point;
         }
@@ -68,7 +61,7 @@ function findPointOnDirection(path: Point[], target: Point, rects: Rectangle[]):
     if (lastPoint[getCoord(direct)] < target[getCoord(direct)]) {
         const newCoord = getUpPointByCoord(lastPoint, 1 - direct, rects);
         if (newCoord.result && newCoord.point 
-            // && checkSegmentNotIntersectionRect([lastPoint, newCoord.point], rects)
+            && checkSegmentNotIntersectionRect([lastPoint, newCoord.point], rects)
         ) {
             return newCoord.point;
         }
@@ -77,7 +70,7 @@ function findPointOnDirection(path: Point[], target: Point, rects: Rectangle[]):
     const newCoord = getDownPointByCoord(lastPoint, 1 - direct, rects);
     
     if (newCoord.result && newCoord.point 
-        // && checkSegmentNotIntersectionRect([lastPoint, newCoord.point], rects)
+        && checkSegmentNotIntersectionRect([lastPoint, newCoord.point], rects)
     ) {
         return newCoord.point;
     }
