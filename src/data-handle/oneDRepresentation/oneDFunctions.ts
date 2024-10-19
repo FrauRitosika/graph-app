@@ -5,13 +5,10 @@ function findPointsOnSide(rect: Rect, coord: COORD): [number, number] {
         , rect.position[getCoord(coord)] + 0.5 * rect.size[coord ? 'height' : 'width']];
 }
 
-// грань в 2d
-//отрезок перевекает одну из точек 
-
 function checkSegmentNotIncludesPoint(oneDSegment: number[], points: number[]) {
     oneDSegment = oneDSegment.sort((num: number) => num);
     for (let point of points) {
-        if (point >= oneDSegment[0] && point <= oneDSegment[1]) {
+        if (point > oneDSegment[0] && point < oneDSegment[1]) {
             return false;
         }
     }
@@ -25,7 +22,6 @@ function checkSegmentNotIntersectionSegment(oneDSegment1: number[], oneDSegment2
     if(oneDSegment1.every(num => num < oneDSegment2[0]) || oneDSegment1.every(num => num > oneDSegment2[1])) {
         return true;
     }
-
     return false;
 }
 

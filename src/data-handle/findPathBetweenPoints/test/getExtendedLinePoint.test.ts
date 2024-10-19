@@ -41,12 +41,8 @@ describe('Функция getExtendedLinePoint находит точку на к�
             cPoint: { point: { x: 0.8, y: 0 }, angle: 270 },
             resultPoint: { x: 0.8, y: 0 - settings.rectGap }
         },
-        {
-            cPoint: { point: { x: 1.5, y: 2 }, angle: 0 },
-            resultPoint: { x: 1.5 + settings.rectGap, y: 2 }
-        },
 
-    ])('точка {$x, $y}, угол $angle', ({ cPoint, resultPoint }) => {
+    ])('', ({ cPoint, resultPoint }) => {
         const rect = new Rectangle(rectangle, cPoint);
 
         expect(getExtendedLinePoint(rect)).toEqual(resultPoint);

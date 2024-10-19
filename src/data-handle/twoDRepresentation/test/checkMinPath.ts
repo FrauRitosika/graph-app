@@ -20,6 +20,7 @@ describe('Функция проверяет можно ли соединить �
         { rect1: rectangle4, rect2: rectangle1, result: true },
     ])('', ({ rect1, rect2, result }) => {
 
-        expect(checkMinPath(pointStart, pointEnd, [rect1, rect2]).result).toEqual(result);
+        expect(checkMinPath(pointStart, pointEnd, [rect1, rect2]
+        ).result).toEqual(result);
     })
 });

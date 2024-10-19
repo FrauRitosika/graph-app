@@ -76,11 +76,24 @@ export default class Rectangle implements IRectangle {
 
     }
 
+
+
+    public get cornerPoints(): Point[] {
+        return [{ x: this.sideX[0], y: this.sideY[0] },
+        { x: this.sideX[0], y: this.sideY[1] },
+        { x: this.sideX[1], y: this.sideY[1] },
+        { x: this.sideX[1], y: this.sideY[0] }];
+    }
+
     public get cornerPointsWithBorder(): Point[] {
-        return [{ x: this.sideX[0] - settings.rectGap, y: this.sideY[0] - settings.rectGap },
-        { x: this.sideX[0] - settings.rectGap, y: this.sideY[1] + settings.rectGap },
-        { x: this.sideX[1] + settings.rectGap, y: this.sideY[1] + settings.rectGap },
-        { x: this.sideX[1] + settings.rectGap, y: this.sideY[0] - settings.rectGap }]
+        const bordarGap = [{ x: -settings.rectGap, y: -settings.rectGap }, { x: -settings.rectGap, y: settings.rectGap }, { x: settings.rectGap, y: settings.rectGap }, { x: settings.rectGap, y: -settings.rectGap }]
+
+        return this.cornerPoints.map((point, index) => {
+            return {
+                x: point.x + bordarGap[index].x,
+                y: point.y + bordarGap[index].y
+            }
+        })
     }
 
     public get sideX(): [number, number] {

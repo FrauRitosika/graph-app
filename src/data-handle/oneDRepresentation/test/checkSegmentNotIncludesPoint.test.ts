@@ -5,7 +5,7 @@ describe('Функция проверяет содердит ли отрезок
         {
             segment: [0, 1],
             points: [0, 1],
-            result: false
+            result: true
         },
         {
             segment: [0, 1],
@@ -15,7 +15,7 @@ describe('Функция проверяет содердит ли отрезок
         {
             segment: [2, 6],
             points: [0, 2],
-            result: false
+            result: true
         },
         {
             segment: [2, 6],
@@ -33,7 +33,7 @@ describe('Функция проверяет содердит ли отрезок
             result: true
         },
 
-    ])('', ({segment, points, result}) => {
+    ])('отрезок: $segment; точки: points', ({segment, points, result}) => {
         expect(checkSegmentNotIncludesPoint(segment, points)).toEqual(result);
     })
 })
