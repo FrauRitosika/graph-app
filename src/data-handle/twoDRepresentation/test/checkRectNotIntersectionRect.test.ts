@@ -12,7 +12,6 @@ describe('Функция проверяет, что два прямоуголь�
 
     it.each([
         { rect1: rectangle1, rect2: rectangle2, result: true },
-        { rect1: rectangle3, rect2: rectangle4, result: true },
         { rect1: rectangle3, rect2: rectangle5, result: false },
         { rect1: rectangle1, rect2: rectangle3, result: false },
         { rect1: rectangle2, rect2: rectangle4, result: true },

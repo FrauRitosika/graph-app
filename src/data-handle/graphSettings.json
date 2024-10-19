@@ -1,8 +1,3 @@
 {
-    "field": {
-        "width": 10,
-        "height": 10,
-        "border": 0.5
-    },
-    "rectGap": 0.2
+    "rectGap": 10
 }

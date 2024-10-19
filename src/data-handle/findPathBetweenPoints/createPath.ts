@@ -1,5 +1,5 @@
 import Rectangle from "../classes/Rectangle";
-import { checkMinPath } from "../twoDRepresentation/findPathBetweenPoints";
+import { checkMinPath } from "./checkMinPath";
 import { checkSegmentNotIntersectionRect } from "../twoDRepresentation/twoDFunctions";
 import { COORD, getCoord, Point } from "../types";
 
@@ -14,17 +14,17 @@ export default function createPath(rectStart: Rectangle, rectEnd: Rectangle) {
         const isAvailibleMinPath = checkMinPath(path[path.length - 1], preEndPoint, [rectStart, rectEnd]);
 
         if (isAvailibleMinPath.result && isAvailibleMinPath.point) {
-                path.push(isAvailibleMinPath.point);
-                isFullPath = true;
-                break;
-            }
-        
-        path.push(findPointOnDirection(path, preEndPoint, [rectStart, rectEnd]));
+            path.push(isAvailibleMinPath.point);
+            isFullPath = true;
+            break;
+        }
+
+        const point = findPointOnDirection(path, preEndPoint, [rectStart, rectEnd]);
+        if (point) path.push(point);
 
     }
 
     if (isFullPath) {
-        console.log([...path, preEndPoint, rectEnd.cPoint.point]);
         return [...path, preEndPoint, rectEnd.cPoint.point];
     } else {
         throw new Error('Не удалось найти путь между точками')
@@ -42,41 +42,45 @@ function getExtendedLinePoint(rect: Rectangle) {
     }
 }
 
-function findPointOnDirection(path: Point[], target: Point, rects: Rectangle[]): Point {
+function findPointOnDirection(path: Point[], target: Point, rects: Rectangle[]) {
     const direct: COORD = path[path.length - 1].x === path[path.length - 2].x ? COORD.x : COORD.y;
     const lastPoint = path[path.length - 1];
 
-    if ((lastPoint[getCoord(1 - direct)] > path[path.length - 2][getCoord(1 - direct)])
-        && (lastPoint[getCoord(1 - direct)] < target[getCoord(1 - direct)])) {
+    let newCoord;
 
-        const newCoord = getUpPointByCoord(lastPoint, direct, rects);
-        if (newCoord.result && newCoord.point 
+    if ((lastPoint[getCoord(1 - direct)] - path[path.length - 2][getCoord(1 - direct)])
+        * (target[getCoord(1 - direct)] - lastPoint[getCoord(1 - direct)]) > 0) {
+
+        newCoord = lastPoint[getCoord(1 - direct)] - path[path.length - 2][getCoord(1 - direct)] > 0
+            ? getUpPointByCoord(lastPoint, direct, rects)
+            : getDownPointByCoord(lastPoint, direct, rects);
+
+        if (newCoord.result && newCoord.point
             && checkSegmentNotIntersectionRect([lastPoint, newCoord.point], rects)
         ) {
             return newCoord.point;
         }
-
     }
 
     if (lastPoint[getCoord(direct)] < target[getCoord(direct)]) {
-        const newCoord = getUpPointByCoord(lastPoint, 1 - direct, rects);
-        if (newCoord.result && newCoord.point 
+        newCoord = getUpPointByCoord(lastPoint, 1 - direct, rects);
+
+        if (newCoord.result && newCoord.point
             && checkSegmentNotIntersectionRect([lastPoint, newCoord.point], rects)
         ) {
             return newCoord.point;
         }
     }
 
-    const newCoord = getDownPointByCoord(lastPoint, 1 - direct, rects);
-    
-    if (newCoord.result && newCoord.point 
+    newCoord = getDownPointByCoord(lastPoint, 1 - direct, rects);
+
+    if (newCoord.result && newCoord.point
         && checkSegmentNotIntersectionRect([lastPoint, newCoord.point], rects)
     ) {
         return newCoord.point;
     }
 
     throw new Error('Не удалось получить путь между точками');
-
 }
 
 
