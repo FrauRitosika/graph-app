@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>График с параметрами</title>
+  <link rel="stylesheet" href="public/style.css">
+</head>
+
+<body>
+  <div class="container">
+    <div class="form-container">
+      <form id="rectangleForm">
+        <h2>Параметры прямоугольников</h2>
+
+        <fieldset>
+          <legend>Прямоугольник 1</legend>
+          <label for="rect1X">x:</label>
+          <input type="number" id="rect1X" name="rect1X" required value="40">
+
+          <label for="rect1Y">y:</label>
+          <input type="number" id="rect1Y" name="rect1Y" required value="10">
+
+          <label for="rect1Width">Ширина:</label>
+          <input type="number" id="rect1Width" name="rect1Width" required value="10">
+
+          <label for="rect1Height">Высота:</label>
+          <input type="number" id="rect1Height" name="rect1Height" required value="20">
+
+          <label for="rect1cPointX">x:</label>
+          <input type="number" id="rect1cPointX" name="rect1cPointX" required value="45">
+
+          <label for="rect1cPointY">y:</label>
+          <input type="number" id="rect1cPointY" name="rect1cPointY" required value="10">
+
+          <label for="rect1cPointAngle">y:</label>
+          <input type="number" id="rect1cPointAngle" name="rect1cPointAngle" required value="0">
+        </fieldset>
+
+        <fieldset>
+          <legend>Прямоугольник 2</legend>
+          <label for="rect2X">x:</label>
+          <input type="number" id="rect2X" name="rect2X" required value="10">
+
+          <label for="rect2Y">y:</label>
+          <input type="number" id="rect2Y" name="rect2Y" required value="10">
+
+          <label for="rect2Width">Ширина:</label>
+          <input type="number" id="rect2Width" name="rect2Width" required value="10">
+
+          <label for="rect2Height">Высота:</label>
+          <input type="number" id="rect2Height" name="rect2Height" required value="20">
+
+          <label for="rect2cPointX">x:</label>
+          <input type="number" id="rect2cPointX" name="rect2cPointX" required value="15">
+
+          <label for="rect2cPointY">y:</label>
+          <input type="number" id="rect2cPointY" name="rect2cPointY" required value="10">
+
+          <label for="rect2cPointAngle">y:</label>
+          <input type="number" id="rect2cPointAngle" name="rect2cPointAngle" required value="0">
+        </fieldset>
+
+        <button id="redrawButton">Отобразить прямоугольники</button>
+        <div class="error-message" id="errorMessage"></div>
+      </form>
+    </div>
+    <div class="chart">
+      <div class="rectangle-preview" id="rectanglePreview">
+        <canvas id="canvas" class="graph" width="500" height="500"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="./src/main.ts"></script>
+</body>
+
+</html>
