@@ -50,7 +50,7 @@ function createGraph() {
 
 
     } catch (error) {
-        let message = 'Неизвестная ошибка';
+        let message = 'Произошла ошибка. К сожалению мы не смогли построить изображение по заданным параметрам';
         if (error instanceof Error) message = error.message;
         printError(message);
         return;

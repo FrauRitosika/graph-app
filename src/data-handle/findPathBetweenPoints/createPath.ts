@@ -12,8 +12,8 @@ export default function createPath(rectStart: Rectangle, rectEnd: Rectangle) {
     for (let i = 0; i < 10; i++) {
 
         const isAvailibleMinPath = checkMinPath(path[path.length - 1], preEndPoint, [rectStart, rectEnd]);
-
         if (isAvailibleMinPath.result && isAvailibleMinPath.point) {
+
             path.push(isAvailibleMinPath.point);
             isFullPath = true;
             break;
@@ -21,6 +21,7 @@ export default function createPath(rectStart: Rectangle, rectEnd: Rectangle) {
 
         const point = findPointOnDirection(path, preEndPoint, [rectStart, rectEnd]);
         if (point) path.push(point);
+        throw new Error('Не удалось определить промежуточную точку')
 
     }
 
