@@ -3,6 +3,10 @@ body {
   font-family: Arial, sans-serif;
 }
 
+h2 {
+  margin: 10px 0;
+}
+
 .container {
   display: flex;
   width: 100%;
@@ -63,4 +67,56 @@ input {
   height: 600px;
   background-color: #f0efef;
   position: relative;
+}
+
+.coordinate-handle {
+  width: 30px;
+  height: 30px;
+  font-size: 18px;
+  margin: 5px;
+}
+
+
+.buttons-container {
+  margin-left: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.row {
+  display: flex;
+}
+
+.input-value-container {
+  display: flex;
+}
+
+.execute-button {
+  height: 40px;
+
+}
+
+.button {
+  border: none;
+  border-radius: 5px;
+  background-color: #3f9cff;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.1s;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.button:active {
+  background-color: #3182d8;
+  transform: scale(0.95);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.button:hover {
+  background-color: #3182d8;
+}
+
+.sub-fieldset {
+  margin-top: 20px;
 }
