@@ -77,7 +77,8 @@ input {
 }
 
 
-.buttons-container {
+.cpoint-coordinate-handle-container,
+.rect-coordinate-handle-container {
   margin-left: auto;
   display: flex;
   flex-direction: column;
