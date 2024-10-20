@@ -1,12 +1,10 @@
 import { ConnectionPoint, Point } from "../data-handle/types";
 
-function changeRectangleParamsByDelta(prefix: string, delta: Point) {
-
-    (<HTMLInputElement>document.getElementById(`${prefix}X`)).value
-        = (parseFloat((<HTMLInputElement>document.getElementById(`${prefix}X`)).value) + delta.x).toString();
-    (<HTMLInputElement>document.getElementById(`${prefix}Y`)).value
-        = (parseFloat((<HTMLInputElement>document.getElementById(`${prefix}Y`)).value) + delta.y).toString();
-
+function changePointByDelta(point: Point, delta: Point) {
+    return {
+        x: point.x + delta.x,
+        y: point.y + delta.y
+    }
 }
 
 function setCPoint(prefix: string, point: ConnectionPoint) {
@@ -15,5 +13,10 @@ function setCPoint(prefix: string, point: ConnectionPoint) {
     (<HTMLInputElement>document.getElementById(`${prefix}cPointAngle`)).value = point.angle.toString();
 }
 
+function setRectangle(prefix: string, point: Point) {
+    (<HTMLInputElement>document.getElementById(`${prefix}X`)).value = point.x.toString();
+    (<HTMLInputElement>document.getElementById(`${prefix}Y`)).value = point.y.toString();
+}
 
-export { changeRectangleParamsByDelta, setCPoint }
+
+export { changePointByDelta, setCPoint, setRectangle }

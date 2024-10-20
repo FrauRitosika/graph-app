@@ -1,6 +1,6 @@
 import dataConverter from './data-handle/dataConverter'
 import { Point, Rect } from './data-handle/types';
-import { changeRectangleParamsByDelta, setCPoint } from './visual-handle/changeFormData';
+import { setRectangle, setCPoint, changePointByDelta } from './visual-handle/changeFormData';
 import { getcPointParams, getPointOnRectSide, getRectangleParams } from './visual-handle/getFormData';
 import settings from './graphSettings.json';
 
@@ -28,12 +28,12 @@ function draw(rect1: Rect, rect2: Rect, path: Point[]) {
         [rect1, rect2].forEach(rect => {
             ctx.fillRect(rect.position.x - 0.5 * rect.size.width, rect.position.y - 0.5 * rect.size.height, rect.size.width, rect.size.height);
             ctx.strokeStyle = 'black';
-            ctx.lineWidth = 2; 
+            ctx.lineWidth = 2;
             ctx.strokeRect(rect.position.x - 0.5 * rect.size.width, rect.position.y - 0.5 * rect.size.height, rect.size.width, rect.size.height);
         });
 
         ctx.strokeStyle = 'black';
-        ctx.lineWidth = 2; 
+        ctx.lineWidth = 2;
         ctx.beginPath();
         ctx.moveTo(path[0].x, path[0].y);
         path.forEach((point, index) => {
@@ -79,10 +79,17 @@ Array.prototype.forEach.call(rectCoordinators,
         rectCoordinator.addEventListener('click', function (event: MouseEvent) {
             if (event.target instanceof HTMLButtonElement && event.target.dataset.action && event.target.dataset.rect) {
                 const action = event.target.dataset.action;
-                changeRectangleParamsByDelta(event.target.dataset.rect, {
+                const prefix = event.target.dataset.rect;
+                const delta = {
                     x: ['left', 'right'].includes(action) ? (action === 'left' ? 0 - settings.rectGap : settings.rectGap) : 0,
                     y: ['up', 'down'].includes(action) ? (action === 'down' ? 0 - settings.rectGap : settings.rectGap) : 0,
+                }
+                setRectangle(prefix, changePointByDelta(getRectangleParams(prefix).position, delta));
+                setCPoint(prefix, {
+                    point: changePointByDelta(getcPointParams(prefix).point, delta),
+                    angle: getcPointParams(prefix).angle
                 });
+                
                 createGraph();
             }
         })
