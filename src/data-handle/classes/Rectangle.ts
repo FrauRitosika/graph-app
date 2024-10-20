@@ -1,6 +1,6 @@
 import { checkSegmentNotIncludesPoint, findPointsOnSide } from "../oneDRepresentation/oneDFunctions";
 import { ConnectionPoint, COORD, getCoord, Point, Rect } from "../types";
-import settings from '../graphSettings.json';
+import settings from '../../graphSettings.json';
 
 interface IRectangle {
     rect: Rect;
