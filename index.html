@@ -5,8 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>График с параметрами</title>
-  <script type="module" crossorigin src="/graph-app/assets/index-fIJESr_p.js"></script>
-  <link rel="stylesheet" crossorigin href="/graph-app/assets/index-BU_o50NN.css">
+  <script type="module" crossorigin src="/graph-app/assets/index-6s2loupT.js"></script>
+  <link rel="stylesheet" crossorigin href="/graph-app/assets/index-CCNrEMnZ.css">
 </head>
 
 <body>
@@ -17,28 +17,54 @@
 
         <fieldset>
           <legend>Прямоугольник 1</legend>
-
-          <div class="input-container">
-            <label for="rect1X">x:</label>
-            <input type="number" id="rect1X" name="rect1X" required value="350">
-            <label for="rect1Y">y:</label>
-            <input type="number" id="rect1Y" name="rect1Y" required value="300">
+          <div class="input-value-container">
+            <div>
+              <div class="input-container">
+                <label for="rect1X">x:</label>
+                <input type="number" id="rect1X" name="rect1X" required value="150">
+              </div>
+              <div class="input-container">
+                <label for="rect1Y">y:</label>
+                <input type="number" id="rect1Y" name="rect1Y" required value="200">
+              </div>
+            </div>
+            <div class="rect-coordinate-handle-container js-rect-coordinator">
+              <div class="row">
+                <button type="button" class="button coordinate-handle" data-rect="rect1" data-action="left">←</button>
+                <button type="button" class="button coordinate-handle" data-rect="rect1" data-action="down">↑</button>
+                <button type="button" class="button coordinate-handle" data-rect="rect1" data-action="right">→</button>
+              </div>
+              <button type="button" class="button coordinate-handle" data-rect="rect1" data-action="up">↓</button>
+            </div>
           </div>
           <div class="input-container">
             <label for="rect1Width">Ширина:</label>
             <input type="number" id="rect1Width" name="rect1Width" required value="100">
-          </div>
-          <div class="input-container">
             <label for="rect1Height">Высота:</label>
-            <input type="number" id="rect1Height" name="rect1Height" required value="200">
+            <input type="number" id="rect1Height" name="rect1Height" required value="100">
           </div>
-          <fieldset>
+          <fieldset class="sub-fieldset">
             <legend>Точка подсоединения</legend>
-            <div class="input-container">
-              <label for="rect1cPointX">x:</label>
-              <input type="number" id="rect1cPointX" name="rect1cPointX" required value="300">
-              <label for="rect1cPointY">y:</label>
-              <input type="number" id="rect1cPointY" name="rect1cPointY" required value="300">
+            <div class="input-value-container">
+              <div>
+                <div class="input-container">
+                  <label for="rect1cPointX">x:</label>
+                  <input type="number" id="rect1cPointX" name="rect1cPointX" required value="100">
+                </div>
+                <div class="input-container">
+                  <label for="rect1cPointY">y:</label>
+                  <input type="number" id="rect1cPointY" name="rect1cPointY" required value="200">
+                </div>
+              </div>
+              <div class="cpoint-coordinate-handle-container js-cpoint-coordinator">
+                <div class="row">
+                  <button type="button" class="button coordinate-handle" data-rect="rect1" data-action="left">←</button>
+                  <button type="button" class="button coordinate-handle" data-rect="rect1" data-action="down">↑</button>
+                  <button type="button" class="button coordinate-handle" data-rect="rect1"
+                    data-action="right">→</button>
+                </div>
+                <button type="button" class="button coordinate-handle" data-rect="rect1" data-action="up">↓</button>
+              </div>
             </div>
             <div class="input-container">
               <label for="rect1cPointAngle">Угол:</label>
@@ -49,27 +75,57 @@
 
         <fieldset>
           <legend>Прямоугольник 2</legend>
-          <div class="input-container">
-            <label for="rect2X">x:</label>
-            <input type="number" id="rect2X" name="rect2X" required value="150">
-            <label for="rect2Y">y:</label>
-            <input type="number" id="rect2Y" name="rect2Y" required value="200">
+          <div class="input-value-container">
+            <div>
+
+              <div class="input-container">
+                <label for="rect2X">x:</label>
+                <input type="number" id="rect2X" name="rect2X" required value="350">
+              </div>
+              <div class="input-container">
+                <label for="rect2Y">y:</label>
+                <input type="number" id="rect2Y" name="rect2Y" required value="300">
+              </div>
+            </div>
+            <div class="rect-coordinate-handle-container js-rect-coordinator">
+              <div class="row">
+                <button type="button" class="button coordinate-handle" data-rect="rect2" data-action="left">←</button>
+                <button type="button" class="button coordinate-handle" data-rect="rect2" data-action="down">↑</button>
+                <button type="button" class="button coordinate-handle" data-rect="rect2" data-action="right">→</button>
+              </div>
+              <button type="button" class="button coordinate-handle" data-rect="rect2" data-action="up">↓</button>
+            </div>
           </div>
           <div class="input-container">
-            <label for="rect2Width">Ширина:</label>
-            <input type="number" id="rect2Width" name="rect2Width" required value="100">
-          </div>
-          <div class="input-container">
-            <label for="rect2Height">Высота:</label>
-            <input type="number" id="rect2Height" name="rect2Height" required value="100">
-          </div>
-          <fieldset>
-            <legend>Точка подсоединения</legend>
             <div class="input-container">
-              <label for="rect2cPointX">x:</label>
-              <input type="number" id="rect2cPointX" name="rect2cPointX" required value="100">
-              <label for="rect2cPointY">y:</label>
-              <input type="number" id="rect2cPointY" name="rect2cPointY" required value="200">
+              <label for="rect2Width">Ширина:</label>
+              <input type="number" id="rect2Width" name="rect2Width" required value="100">
+              <label for="rect2Height">Высота:</label>
+              <input type="number" id="rect2Height" name="rect2Height" required value="200">
+            </div>
+          </div>
+          <fieldset class="sub-fieldset">
+            <legend>Точка подсоединения</legend>
+            <div class="input-value-container">
+              <div>
+                <div class="input-container">
+                  <label for="rect2cPointX">x:</label>
+                  <input type="number" id="rect2cPointX" name="rect2cPointX" required value="300">
+                </div>
+                <div class="input-container">
+                  <label for="rect2cPointY">y:</label>
+                  <input type="number" id="rect2cPointY" name="rect2cPointY" required value="300">
+                </div>
+              </div>
+              <div class="cpoint-coordinate-handle-container js-cpoint-coordinator">
+                <div class="row">
+                  <button type="button" class="button coordinate-handle" data-rect="rect2" data-action="left">←</button>
+                  <button type="button" class="button coordinate-handle" data-rect="rect2" data-action="down">↑</button>
+                  <button type="button" class="button coordinate-handle" data-rect="rect2"
+                    data-action="right">→</button>
+                </div>
+                <button type="button" class="button coordinate-handle" data-rect="rect2" data-action="up">↓</button>
+              </div>
             </div>
             <div class="input-container">
               <label for="rect2cPointAngle">Угол:</label>
@@ -78,7 +134,7 @@
           </fieldset>
         </fieldset>
 
-        <button id="redrawButton">Отобразить прямоугольники</button>
+        <button id="redrawButton" class="button execute-button">Отобразить прямоугольники</button>
         <div class="error-message" id="errorMessage"></div>
       </form>
     </div>
