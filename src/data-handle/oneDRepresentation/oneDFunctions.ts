@@ -19,7 +19,7 @@ function checkSegmentNotIncludesPoint(oneDSegment: number[], points: number[]) {
 function checkSegmentNotIntersectionSegment(oneDSegment1: number[], oneDSegment2: number[]) {
     oneDSegment2 = oneDSegment2.sort((num: number) => num);
 
-    if(oneDSegment1.every(num => num < oneDSegment2[0]) || oneDSegment1.every(num => num > oneDSegment2[1])) {
+    if(oneDSegment1.every(num => num <= oneDSegment2[0]) || oneDSegment1.every(num => num >= oneDSegment2[1])) {
         return true;
     }
     return false;

@@ -1,46 +1,63 @@
 import dataConverter from './data-handle/dataConverter'
+import { ConnectionPoint, Point, Rect } from './data-handle/types';
 
 const errorElement = <HTMLInputElement>document.getElementById('errorMessage');
-
 const canvas = <HTMLCanvasElement>document.getElementById("canvas");
+
 const ctx = canvas.getContext('2d');
-if(ctx) {
-    ctx.translate(0, 500);
-}
 
+createGraph();
 
-function draw() {
+document.getElementById('redrawButton')!.addEventListener('click', function (event) {
+    event.preventDefault();
+    createGraph();
+});
+
+function draw(rect1: Rect, rect2: Rect, path: Point[]) {
+
     if (ctx) {
+
         ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = "rgba(168, 210, 255)";
+        [rect1, rect2].forEach(rect => {
+            ctx.fillRect(rect.position.x - 0.5 * rect.size.width, rect.position.y - 0.5 * rect.size.height, rect.size.width, rect.size.height);
+        });
 
-        ctx.fillStyle = "rgb(69, 159, 255)";
-        ctx.fillRect(100,-100,40,40);
+        ctx.beginPath();
+        ctx.moveTo(path[0].x, path[0].y);
+        path.forEach((point, index) => {
+            if (index) ctx.lineTo(point.x, point.y);
+        })
+        ctx.stroke(); 
 
-        ctx.fillRect(300,-100,40,40);
-        
-        console.log('нарисовал');
     }
 
 }
 
-
-document.getElementById('redrawButton')!.addEventListener('click', function (event) {
-    event.preventDefault();
+function createGraph() {
+    printError('');
     try {
-        dataConverter(getRectangleParams('rect1'), getRectangleParams('rect2'), getcPointParams('rect1'), getcPointParams('rect2'));
+
+        const data = {
+            rect1: getRectangleParams('rect1'),
+            rect2: getRectangleParams('rect2'),
+            cPoint1: getcPointParams('rect1'),
+            cPoint2: getcPointParams('rect2')
+        }
+
+        const path = dataConverter(data.rect1, data.rect2, data.cPoint1, data.cPoint2);
+        draw(data.rect1, data.rect2, path);
+
+
     } catch (error) {
-        let message = 'Неизвестная ошибка';
+        let message = 'Произошла ошибка. К сожалению, мы не смогли создать изображение по указанным параметрам. Пожалуйста, проверьте введенные данные и попробуйте снова.';
         if (error instanceof Error) message = error.message;
         printError(message);
         return;
     }
+}
 
-    draw();
-});
-
-
-
-function getRectangleParams(prefix: string) {
+function getRectangleParams(prefix: string): Rect {
     return {
         position: {
             x: parseFloat((<HTMLInputElement>document.getElementById(`${prefix}X`)).value),
@@ -53,7 +70,7 @@ function getRectangleParams(prefix: string) {
     };
 }
 
-function getcPointParams(prefix: string) {
+function getcPointParams(prefix: string): ConnectionPoint {
     return {
         point: {
             x: parseFloat((<HTMLInputElement>document.getElementById(`${prefix}cPointX`)).value),
