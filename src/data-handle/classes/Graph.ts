@@ -13,7 +13,7 @@ export default class Graph {
     }
 
     private validateIntersectionRect() {
-        if(!checkRectNotIntersectionRect(this.rectStart, this.rectEnd)) throw new Error('Прямоугольники слишком близко');
+        if(!checkRectNotIntersectionRect(this.rectStart, this.rectEnd)) throw new Error('Ошибка: Прямоугольники расположены слишком близко друг к другу. Между их гранями должно быть минимальное расстояние в 10 пикселей. Пожалуйста, отредактируйте положение прямоугольников.');
     }
  
 }

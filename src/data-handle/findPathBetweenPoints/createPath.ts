@@ -21,14 +21,13 @@ export default function createPath(rectStart: Rectangle, rectEnd: Rectangle) {
 
         const point = findPointOnDirection(path, preEndPoint, [rectStart, rectEnd]);
         if (point) path.push(point);
-        throw new Error('Не удалось определить промежуточную точку')
 
     }
 
     if (isFullPath) {
         return [...path, preEndPoint, rectEnd.cPoint.point];
     } else {
-        throw new Error('Не удалось найти путь между точками')
+        throw new Error('Произошла ошибка. К сожалению, мы не смогли создать изображение по указанным параметрам. Пожалуйста, проверьте введенные данные и попробуйте снова.')
     }
 
 }
@@ -39,7 +38,7 @@ function getExtendedLinePoint(rect: Rectangle) {
         case 180: return { ...rect.cPoint.point, x: rect.cornerPointsWithBorder[0].x }
         case 90: return { ...rect.cPoint.point, y: rect.cornerPointsWithBorder[2].y }
         case 270: return { ...rect.cPoint.point, y: rect.cornerPointsWithBorder[0].y }
-        default: throw new Error('Для одного из прямоугольников задан некорректный угол')
+        default: throw new Error('Ошибка: Для одного из прямоугольников задан неверный угол. Убедитесь, что угол точки соединения направлен наружу от прямоугольника под углом 0, 90, 180 или 270 градусов. ')
     }
 }
 
@@ -52,13 +51,9 @@ function findPointOnDirection(path: Point[], target: Point, rects: Rectangle[]) 
     if ((lastPoint[getCoord(1 - direct)] - path[path.length - 2][getCoord(1 - direct)])
         * (target[getCoord(1 - direct)] - lastPoint[getCoord(1 - direct)]) > 0) {
 
-        newCoord = lastPoint[getCoord(1 - direct)] - path[path.length - 2][getCoord(1 - direct)] > 0
-            ? getUpPointByCoord(lastPoint, direct, rects)
-            : getDownPointByCoord(lastPoint, direct, rects);
-
+        newCoord = forwardPath();
         if (newCoord.result && newCoord.point
-            && checkSegmentNotIntersectionRect([lastPoint, newCoord.point], rects)
-        ) {
+            && checkSegmentNotIntersectionRect([lastPoint, newCoord.point], rects)) {
             return newCoord.point;
         }
     }
@@ -66,9 +61,7 @@ function findPointOnDirection(path: Point[], target: Point, rects: Rectangle[]) 
     if (lastPoint[getCoord(direct)] < target[getCoord(direct)]) {
         newCoord = getUpPointByCoord(lastPoint, 1 - direct, rects);
 
-        if (newCoord.result && newCoord.point
-            && checkSegmentNotIntersectionRect([lastPoint, newCoord.point], rects)
-        ) {
+        if (newCoord.result && newCoord.point && checkSegmentNotIntersectionRect([lastPoint, newCoord.point], rects)) {
             return newCoord.point;
         }
     }
@@ -76,12 +69,23 @@ function findPointOnDirection(path: Point[], target: Point, rects: Rectangle[]) 
     newCoord = getDownPointByCoord(lastPoint, 1 - direct, rects);
 
     if (newCoord.result && newCoord.point
-        && checkSegmentNotIntersectionRect([lastPoint, newCoord.point], rects)
-    ) {
+        && checkSegmentNotIntersectionRect([lastPoint, newCoord.point], rects)) {
         return newCoord.point;
+    } else {
+        newCoord = forwardPath();
+        if (newCoord.result && newCoord.point
+            && checkSegmentNotIntersectionRect([lastPoint, newCoord.point], rects)) {
+            return newCoord.point;
+        }
     }
 
     throw new Error('Не удалось получить путь между точками');
+
+    function forwardPath() {
+        return lastPoint[getCoord(1 - direct)] - path[path.length - 2][getCoord(1 - direct)] > 0
+            ? getUpPointByCoord(lastPoint, direct, rects)
+            : getDownPointByCoord(lastPoint, direct, rects);
+    }
 }
 
 
@@ -105,11 +109,12 @@ function getDownPointByCoord(point: Point, direct: COORD, rects: Rectangle[]) {
     const downPoints = rects.map(rect => [rect.cornerPointsWithBorder[0][getCoord(1 - direct)], rect.cornerPointsWithBorder[2][getCoord(1 - direct)]])
         .reduce((arr, side) => side.concat(arr), [])
         .filter(coord => coord < point[getCoord(1 - direct)]);
+
     if (downPoints.length === 0) {
         return { result: false }
     }
-
     return {
+
         result: true,
         point: {
             x: direct ? Math.max(...downPoints) : point.x,

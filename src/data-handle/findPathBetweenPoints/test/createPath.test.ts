@@ -15,56 +15,56 @@ const testRect2: Rect = {
 describe('Функция должна возвращать список точек, по которым можно построить ломанную линию от точки 1 до точки 2', () => {
 
     it.each([
-        // {
-        //     cPoint1: {
-        //         point: { x: 300, y: 300 },
-        //         angle: 180
-        //     },
-        //     cPoint2: {
-        //         point: { x: 100, y: 200 },
-        //         angle: 180
-        //     }
-        // },
-        // {
-        //     cPoint1: {
-        //         point: { x: 400, y: 300 },
-        //         angle: 0
-        //     },
-        //     cPoint2: {
-        //         point: { x: 100, y: 200 },
-        //         angle: 180
-        //     }
-        // },
-        // {
-        //     cPoint1: {
-        //         point: { x: 350, y: 200 },
-        //         angle: 270
-        //     },
-        //     cPoint2: {
-        //         point: { x: 100, y: 200 },
-        //         angle: 180
-        //     }
-        // },
-        // {
-        //     cPoint1: {
-        //         point: { x: 400, y: 205 },
-        //         angle: 0
-        //     },
-        //     cPoint2: {
-        //         point: { x: 100, y: 205 },
-        //         angle: 180
-        //     }
-        // },
-        // {
-        //     cPoint1: {
-        //         point: { x: 350, y: 200 },
-        //         angle: 270
-        //     },
-        //     cPoint2: {
-        //         point: { x: 150, y: 250 },
-        //         angle: 90
-        //     }
-        // },
+        {
+            cPoint1: {
+                point: { x: 300, y: 300 },
+                angle: 180
+            },
+            cPoint2: {
+                point: { x: 100, y: 200 },
+                angle: 180
+            }
+        },
+        {
+            cPoint1: {
+                point: { x: 400, y: 300 },
+                angle: 0
+            },
+            cPoint2: {
+                point: { x: 100, y: 200 },
+                angle: 180
+            }
+        },
+        {
+            cPoint1: {
+                point: { x: 350, y: 200 },
+                angle: 270
+            },
+            cPoint2: {
+                point: { x: 100, y: 200 },
+                angle: 180
+            }
+        },
+        {
+            cPoint1: {
+                point: { x: 400, y: 205 },
+                angle: 0
+            },
+            cPoint2: {
+                point: { x: 100, y: 205 },
+                angle: 180
+            }
+        },
+        {
+            cPoint1: {
+                point: { x: 350, y: 200 },
+                angle: 270
+            },
+            cPoint2: {
+                point: { x: 150, y: 250 },
+                angle: 90
+            }
+        },
         {
             cPoint1: {
                 point: { x: 400, y: 300 },

@@ -34,12 +34,12 @@ export default class Rectangle implements IRectangle {
                 return i;
             }
         }
-        throw new Error('Точка должна лежать на грани прямоугольника');
+        throw new Error('Ошибка: Точка соединения должна находиться на грани прямоугольника.');
     }
 
     private validateConnectionPoint(side: COORD) {
         if (checkSegmentNotIncludesPoint(1 - side ? this.sideY : this.sideX, [this.cPoint.point[getCoord(1 - side)]])) {
-            throw new Error('Точка должна лежать на грани прямоугольника');
+            throw new Error('Ошибка: Точка соединения должна находиться на грани прямоугольника.');
         }
     }
 
@@ -51,7 +51,7 @@ export default class Rectangle implements IRectangle {
                 break;
             case COORD.y: this._sideY = points;
                 break;
-            default: throw new Error('Не удалось определить грань прямоугольника');
+            default: throw new Error('Ошибка: Не удалось определить грань прямоугольника');
         }
 
         return points;
@@ -69,10 +69,10 @@ export default class Rectangle implements IRectangle {
                     || (this.cPoint.point[getCoord(side)] === Math.min(...this._sideY) && this.cPoint.angle === 270)) {
                     return;
                 } else { break; }
-            default: throw new Error('Неверный угол');
+            default: throw new Error('Ошибка: Для одного из прямоугольников задан неверный угол. Убедитесь, что угол точки соединения направлен наружу от прямоугольника под углом 0, 90, 180 или 270 градусов. ');
         };
 
-        throw new Error('Неверный угол');
+        throw new Error('Ошибка: Для одного из прямоугольников задан неверный угол. Убедитесь, что угол точки соединения направлен наружу от прямоугольника под углом 0, 90, 180 или 270 градусов. ');
 
     }
 
