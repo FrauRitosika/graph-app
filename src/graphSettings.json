@@ -1,3 +1,4 @@
 {
-    "rectGap": 10
+    "rectGap": 20, 
+    "rectLineGap": 10
 }

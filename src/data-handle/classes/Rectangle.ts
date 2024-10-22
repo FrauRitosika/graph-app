@@ -1,6 +1,5 @@
 import { checkSegmentNotIncludesPoint, findPointsOnSide } from "../oneDRepresentation/oneDFunctions";
 import { ConnectionPoint, COORD, getCoord, Point, Rect } from "../types";
-import settings from '../../graphSettings.json';
 
 interface IRectangle {
     rect: Rect;
@@ -85,16 +84,16 @@ export default class Rectangle implements IRectangle {
         { x: this.sideX[1], y: this.sideY[0] }];
     }
 
-    public get cornerPointsWithBorder(): Point[] {
-        const bordarGap = [{ x: -settings.rectGap, y: -settings.rectGap }, { x: -settings.rectGap, y: settings.rectGap }, { x: settings.rectGap, y: settings.rectGap }, { x: settings.rectGap, y: -settings.rectGap }]
+    // public get cornerPointsWithBorder(): Point[] {
+    //     const bordarGap = [{ x: -settings.rectGap, y: -settings.rectGap }, { x: -settings.rectGap, y: settings.rectGap }, { x: settings.rectGap, y: settings.rectGap }, { x: settings.rectGap, y: -settings.rectGap }]
 
-        return this.cornerPoints.map((point, index) => {
-            return {
-                x: point.x + bordarGap[index].x,
-                y: point.y + bordarGap[index].y
-            }
-        })
-    }
+    //     return this.cornerPoints.map((point, index) => {
+    //         return {
+    //             x: point.x + bordarGap[index].x,
+    //             y: point.y + bordarGap[index].y
+    //         }
+    //     })
+    // }
 
     public get sideX(): [number, number] {
         return this._sideX ?? this.sidePoints(COORD.x);
