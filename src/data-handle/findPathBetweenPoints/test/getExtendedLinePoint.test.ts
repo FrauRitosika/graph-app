@@ -19,27 +19,27 @@ describe('Функция getExtendedLinePoint находит точку на к�
     it.each([
         {
             cPoint: { point: { x: 1.5, y: 1 }, angle: 0 },
-            resultPoint: { x: 1.5 + settings.rectGap, y: 1 }
+            resultPoint: { x: 1.5 + settings.rectLineGap, y: 1 }
         },
         {
             cPoint: { point: { x: 1.4, y: 2 }, angle: 90 },
-            resultPoint: { x: 1.4, y: 2 + settings.rectGap }
+            resultPoint: { x: 1.4, y: 2 + settings.rectLineGap }
         },
         {
             cPoint: { point: { x: 0.6, y: 2 }, angle: 90 },
-            resultPoint: { x: 0.6, y: 2 + settings.rectGap }
+            resultPoint: { x: 0.6, y: 2 + settings.rectLineGap }
         },
         {
             cPoint: { point: { x: 0.5, y: 0.4 }, angle: 180 },
-            resultPoint: { x: 0.5 - settings.rectGap, y: 0.4 }
+            resultPoint: { x: 0.5 - settings.rectLineGap, y: 0.4 }
         },
         {
             cPoint: { point: { x: 0.5, y: 0.1 }, angle: 180 },
-            resultPoint: { x: 0.5 - settings.rectGap, y: 0.1 }
+            resultPoint: { x: 0.5 - settings.rectLineGap, y: 0.1 }
         },
         {
             cPoint: { point: { x: 0.8, y: 0 }, angle: 270 },
-            resultPoint: { x: 0.8, y: 0 - settings.rectGap }
+            resultPoint: { x: 0.8, y: 0 - settings.rectLineGap }
         },
 
     ])('', ({ cPoint, resultPoint }) => {

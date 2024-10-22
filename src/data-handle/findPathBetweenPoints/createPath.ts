@@ -2,6 +2,7 @@ import Rectangle from "../classes/Rectangle";
 import { checkMinPath } from "./checkMinPath";
 import { checkSegmentNotIntersectionRect } from "../twoDRepresentation/twoDFunctions";
 import { COORD, getCoord, Point } from "../types";
+import settings from '../../graphSettings.json';
 
 
 export default function createPath(rectStart: Rectangle, rectEnd: Rectangle) {
@@ -34,10 +35,10 @@ export default function createPath(rectStart: Rectangle, rectEnd: Rectangle) {
 
 function getExtendedLinePoint(rect: Rectangle) {
     switch (rect.cPoint.angle) {
-        case 0: return { ...rect.cPoint.point, x: rect.cornerPointsWithBorder[2].x }
-        case 180: return { ...rect.cPoint.point, x: rect.cornerPointsWithBorder[0].x }
-        case 90: return { ...rect.cPoint.point, y: rect.cornerPointsWithBorder[2].y }
-        case 270: return { ...rect.cPoint.point, y: rect.cornerPointsWithBorder[0].y }
+        case 0: return { ...rect.cPoint.point, x: rect.cornerPoints[2].x + settings.rectLineGap }
+        case 180: return { ...rect.cPoint.point, x: rect.cornerPoints[0].x - settings.rectLineGap }
+        case 90: return { ...rect.cPoint.point, y: rect.cornerPoints[2].y + settings.rectLineGap }
+        case 270: return { ...rect.cPoint.point, y: rect.cornerPoints[0].y - settings.rectLineGap }
         default: throw new Error('Ошибка: Для одного из прямоугольников задан неверный угол. Убедитесь, что угол точки соединения направлен наружу от прямоугольника под углом 0, 90, 180 или 270 градусов. ')
     }
 }
@@ -53,7 +54,7 @@ function findPointOnDirection(path: Point[], target: Point, rects: Rectangle[]) 
 
         newCoord = forwardPath();
         if (newCoord.result && newCoord.point
-            && checkSegmentNotIntersectionRect([lastPoint, newCoord.point], rects)) {
+            && checkSegmentNotIntersectionRect(settings.rectLineGap,[lastPoint, newCoord.point], rects)) {
             return newCoord.point;
         }
     }
@@ -61,7 +62,7 @@ function findPointOnDirection(path: Point[], target: Point, rects: Rectangle[]) 
     if (lastPoint[getCoord(direct)] < target[getCoord(direct)]) {
         newCoord = getUpPointByCoord(lastPoint, 1 - direct, rects);
 
-        if (newCoord.result && newCoord.point && checkSegmentNotIntersectionRect([lastPoint, newCoord.point], rects)) {
+        if (newCoord.result && newCoord.point && checkSegmentNotIntersectionRect(settings.rectLineGap,[lastPoint, newCoord.point], rects)) {
             return newCoord.point;
         }
     }
@@ -69,12 +70,12 @@ function findPointOnDirection(path: Point[], target: Point, rects: Rectangle[]) 
     newCoord = getDownPointByCoord(lastPoint, 1 - direct, rects);
 
     if (newCoord.result && newCoord.point
-        && checkSegmentNotIntersectionRect([lastPoint, newCoord.point], rects)) {
+        && checkSegmentNotIntersectionRect(settings.rectLineGap,[lastPoint, newCoord.point], rects)) {
         return newCoord.point;
     } else {
         newCoord = forwardPath();
         if (newCoord.result && newCoord.point
-            && checkSegmentNotIntersectionRect([lastPoint, newCoord.point], rects)) {
+            && checkSegmentNotIntersectionRect(settings.rectLineGap,[lastPoint, newCoord.point], rects)) {
             return newCoord.point;
         }
     }
@@ -90,7 +91,7 @@ function findPointOnDirection(path: Point[], target: Point, rects: Rectangle[]) 
 
 
 function getUpPointByCoord(point: Point, direct: COORD, rects: Rectangle[]) {
-    const upPoints = rects.map(rect => [rect.cornerPointsWithBorder[0][getCoord(1 - direct)], rect.cornerPointsWithBorder[3][getCoord(1 - direct)]])
+    const upPoints = rects.map(rect => [rect.cornerPoints[0][getCoord(1 - direct)]- settings.rectLineGap, rect.cornerPoints[2][getCoord(1 - direct)] + settings.rectLineGap])
         .reduce((arr, side) => arr.concat(side), [])
         .filter(coord => coord > point[getCoord(1 - direct)]);
     if (upPoints.length === 0) {
@@ -106,7 +107,7 @@ function getUpPointByCoord(point: Point, direct: COORD, rects: Rectangle[]) {
 }
 
 function getDownPointByCoord(point: Point, direct: COORD, rects: Rectangle[]) {
-    const downPoints = rects.map(rect => [rect.cornerPointsWithBorder[0][getCoord(1 - direct)], rect.cornerPointsWithBorder[2][getCoord(1 - direct)]])
+    const downPoints = rects.map(rect => [rect.cornerPoints[0][getCoord(1 - direct)]- settings.rectLineGap, rect.cornerPoints[2][getCoord(1 - direct)] + settings.rectLineGap])
         .reduce((arr, side) => side.concat(arr), [])
         .filter(coord => coord < point[getCoord(1 - direct)]);
 

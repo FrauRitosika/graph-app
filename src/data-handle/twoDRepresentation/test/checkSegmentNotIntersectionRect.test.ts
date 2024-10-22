@@ -17,7 +17,7 @@ describe('Функция проверяет пеоресекает ли отре
         { segment: { point1: { x: 8, y: 5 }, point2: { x: 8, y: 3 } }, result: false }
 
     ])('отрезок {x: $segment.point1.x, y:$segment.point1.y} - {x: $segment.point2.x, y:$segment.point2.y}', ({ segment, result }) => {
-        expect(checkSegmentNotIntersectionRect([segment.point1, segment.point2], [rectangle1, rectangle2])).toEqual(result);
+        expect(checkSegmentNotIntersectionRect(10, [segment.point1, segment.point2], [rectangle1, rectangle2])).toEqual(result);
     })
 });
 
@@ -33,6 +33,6 @@ describe('Функция проверяет пеоресекает ли отре
         { segment: { point1: { x: 90, y: 140 }, point2: { x: 290, y: 140 } }, result: true },
 
     ])('отрезок {x: $segment.point1.x, y:$segment.point1.y} - {x: $segment.point2.x, y:$segment.point2.y}', ({ segment, result }) => {
-        expect(checkSegmentNotIntersectionRect([segment.point1, segment.point2], [rectangle3, rectangle4])).toEqual(result);
+        expect(checkSegmentNotIntersectionRect(10, [segment.point1, segment.point2], [rectangle3, rectangle4])).toEqual(result);
     })
 });
