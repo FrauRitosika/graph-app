@@ -1,6 +1,5 @@
-import Rectangle from "../../classes/Rectangle";
 import { Rect } from "../../types";
-import createPath from "../createPath";
+import createPath from "../../dataConverter";
 
 const testRect1: Rect = {
     position: { x: 350, y: 300 },
@@ -79,7 +78,7 @@ describe('Функция должна возвращать список точе
     ])('должны быть соединены точки {x: $cPoint1.point.x , y: $cPoint1.point.y} и {x: $cPoint2.point.x , y: $cPoint2.point.y}'
         , ({ cPoint1, cPoint2 }) => {
 
-            const path = createPath(new Rectangle(testRect1, cPoint1), new Rectangle(testRect2, cPoint2));
+            const path = createPath(testRect1, testRect2, cPoint1, cPoint2);
 
             expect(path[path.length - 1]).toEqual(cPoint2.point);
 

@@ -1,19 +1,19 @@
 import { checkRectNotIntersectionRect } from "../twoDRepresentation/twoDFunctions";
 import Rectangle from "./Rectangle";
 import settings from '../../graphSettings.json';
-import createPath from "../findPathBetweenPoints/createPath";
-import { Point } from "../types";
+import dataConverter from "../dataConverter";
+import { ConnectionPoint, Point, Rect } from "../types";
 
 export default class Graph {
     rectStart: Rectangle;
     rectEnd: Rectangle;
     path: Point[];
     
-    constructor(rect1: Rectangle, rect2: Rectangle) {
-        this.rectStart = rect1;
-        this.rectEnd = rect2;
+    constructor(rect1: Rect, rect2: Rect, cPoint1: ConnectionPoint, cPoint2: ConnectionPoint) {
+        this.rectStart = new Rectangle(rect1, cPoint1);
+        this.rectEnd = new Rectangle(rect2, cPoint2);;
         this.validateIntersectionRect();
-        this.path = createPath(rect1, rect2);
+        this.path = dataConverter(rect1, rect2, cPoint1, cPoint2);
     }
 
     private validateIntersectionRect() {

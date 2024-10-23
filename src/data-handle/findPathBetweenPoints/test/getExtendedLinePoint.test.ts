@@ -1,6 +1,6 @@
 import Rectangle from "../../classes/Rectangle";
 import { Rect } from "../../types";
-import { getExtendedLinePoint } from '../createPath';
+import { getExtendedLinePoint } from '../../dataConverter';
 import settings from '../../../graphSettings.json';
 
 const rectangle: Rect = {
