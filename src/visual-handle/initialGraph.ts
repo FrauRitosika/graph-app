@@ -1,4 +1,4 @@
-import dataConverter from "../data-handle/dataConverter"
+import Graph from "../data-handle/classes/Graph";
 
 const initialDataGraph = {
     rect1: {
@@ -35,6 +35,6 @@ const initialDataGraph = {
     }
 }
 
-const initialGraph = dataConverter(initialDataGraph.rect1, initialDataGraph.rect2, initialDataGraph.cPoint1, initialDataGraph.cPoint2);
+const initialGraph = new Graph(initialDataGraph.rect1, initialDataGraph.rect2, initialDataGraph.cPoint1, initialDataGraph.cPoint2);
 
 export { initialGraph }

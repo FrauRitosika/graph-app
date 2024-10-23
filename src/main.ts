@@ -1,11 +1,11 @@
-import dataConverter from './data-handle/dataConverter';
-import { setRectangle, setCPoint, changePointByDelta, setGraphParams } from './data-form/changeFormData';
+import { setCPoint, setGraphParams } from './data-form/changeFormData';
 import { getcPointParams, getPointOnRectSide, getRectangleParams } from './data-form/getFormData';
 import { drawGraph, focusOnRect } from './visual-handle/drawGraph';
 import { initialGraph } from './visual-handle/initialGraph';
 import { getRectPrefixByClick } from './visual-handle/getRectPrefixByClick';
 import Rectangle from './data-handle/classes/Rectangle';
 import { moveRect } from './visual-handle/moveElementsOnGraph';
+import Graph from './data-handle/classes/Graph';
 
 const errorElement = <HTMLInputElement>document.getElementById('errorMessage');
 const canvas = <HTMLCanvasElement>document.getElementById("canvas");
@@ -80,7 +80,7 @@ function createGraph(ctx: CanvasRenderingContext2D) {
     printError('');
 
     try {
-        dataGraph = dataConverter(getRectangleParams('rect1'), getRectangleParams('rect2'),
+        dataGraph = new Graph(getRectangleParams('rect1'), getRectangleParams('rect2'),
             getcPointParams('rect1'), getcPointParams('rect2'));
         if(focusedRect) {
             focusedRect.rectangle = focusedRect.prefix === 'rect1' ? dataGraph.rectStart : dataGraph.rectEnd;
