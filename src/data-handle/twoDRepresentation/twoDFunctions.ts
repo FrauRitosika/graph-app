@@ -7,8 +7,8 @@ function checkSegmentNotIntersectionRect(gap: number, points: Point[], rects: Re
     const coordDirect = points[0].x === points[1].x ? COORD.x : COORD.y;
 
     for (let rect of rects) {
-        const borderY = [rect.cornerPoints[0].y - gap, rect.cornerPoints[1].y + gap]
-        const borderX = [rect.cornerPoints[0].x - gap, rect.cornerPoints[3].x + gap];
+        const borderY = [rect.cornerPoints[0].y - gap, rect.cornerPoints[2].y + gap]
+        const borderX = [rect.cornerPoints[0].x - gap, rect.cornerPoints[2].x + gap];
 
 
         if (!checkSegmentNotIncludesPoint(coordDirect ? borderY : borderX, [points[0][getCoord(coordDirect)]])

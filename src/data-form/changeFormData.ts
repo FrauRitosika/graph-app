@@ -24,10 +24,10 @@ function setRectangle(prefix: string, point: Point, size?: Size) {
 }
 
 function setGraphParams(dataGraph: Graph) {
-    setRectangle('rect1', dataGraph.rectStart.rect.position, dataGraph.rectStart.rect.size);
-    setCPoint('rect1', dataGraph.rectStart.cPoint);
-    setRectangle('rect2', dataGraph.rectEnd.rect.position, dataGraph.rectEnd.rect.size);
-    setCPoint('rect2', dataGraph.rectEnd.cPoint);
+    setRectangle('rect1', dataGraph.rectList[0].rectangle.rect.position, dataGraph.rectList[0].rectangle.rect.size);
+    setCPoint('rect1', dataGraph.rectList[0].rectangle.cPoint);
+    setRectangle('rect2', dataGraph.rectList[1].rectangle.rect.position, dataGraph.rectList[1].rectangle.rect.size);
+    setCPoint('rect2', dataGraph.rectList[1].rectangle.cPoint);
 }
 
 
