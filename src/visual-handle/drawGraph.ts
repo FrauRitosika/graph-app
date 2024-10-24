@@ -4,7 +4,7 @@ import { Rect } from "../data-handle/types";
 function drawGraph(ctx: CanvasRenderingContext2D, data: Graph) {
 
     if (ctx) {
-        [data.rectStart, data.rectEnd].forEach(data => {
+        [data.rectList[0].rectangle, data.rectList[1].rectangle].forEach(data => {
             ctx.fillRect(data.rect.position.x - 0.5 * data.rect.size.width, data.rect.position.y - 0.5 * data.rect.size.height
                 , data.rect.size.width, data.rect.size.height);
             ctx.strokeStyle = 'black';
